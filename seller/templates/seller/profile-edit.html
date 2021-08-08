@@ -1,0 +1,49 @@
+
+
+{% extends "seller/base.html"%}
+{% block content%}
+{% load crispy_forms_tags %}
+
+<div class="content-section">
+    <div class="media-body">
+        <h2 class="account-heading">{{user.username}}</h2>
+        <p class="text-secondary">{{user.email}}</p>
+        </button></a>
+    </div>
+  </div>
+  <!-- FORM HERE -->
+</div>
+
+
+<div class='container-section'>
+    <form method='POST' enctype = "multipart/form-data">
+        {% csrf_token %}
+        <fieldset class='form-group'>
+            <legend class='border-bottom mb-4'>
+                Profile Info            
+            </legend>
+            {{ u_form | crispy }}
+            {{ s_form | crispy }}
+        </fieldset>
+        <div class = 'form-group'>
+            <button class ='btn btn-outline-info' type='submit'>
+                Update          
+            </button>
+        </div>
+    </form>
+<div>
+
+<div class='container-section'>
+    <a href=" {% url 'edit-pin' %} ">
+    <button class ='btn btn-outline-info'>
+        Edit Address
+    </button></a>
+<div><br>
+
+<div class='container-section'>
+    <a href=" {% url 'add-inavailability' %} ">
+    <button class ='btn btn-outline-info'>
+        Add Inavailability
+    </button></a>
+<div><br><br>
+  {%endblock content%}  

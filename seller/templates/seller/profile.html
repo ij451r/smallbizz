@@ -1,0 +1,66 @@
+{% extends "seller/base.html"%}
+{% block content%}
+
+{{owner.email}}
+<br>
+{{seller.Owner.username}}<br>
+
+{{seller.StoreName}}<br><br>
+
+<img src="{{seller.StoreLogo.url}}"><br><br>
+
+{{seller.phone_number}}<br>
+
+{{seller.pincode}}<br>
+{% autoescape on %}
+<a href="https://maps.google.com/maps?q={{seller.latitude}},{{seller.longitude}}&hl=en&num=1&t=h&z=13" target="_blank">Location</a><br>
+
+{% endautoescape %}
+{{seller.latitude}}<br>
+{{seller.longitude}}<br>
+
+{{seller.Deliver_anywhere}}<br>
+
+{{seller.Local_Delivery_Distance}}<br>
+
+{{seller.insta_social}}<br>
+
+{{seller.ContactPreference}}<br>
+
+{{seller.Premium}}<br>
+
+{{seller.Premium_start_date}}<br>
+
+{{seller.Premium_end_date}}<br>
+<br>
+<hr>
+{% for product in products %}
+{{product.id}}:&emsp;
+{{product.Product_Name}}<br>
+{{product.category}}<br>
+{{product.Product_Description}}<br>
+{{product.seller}}<br>
+<img src="{{product.Product_Image_1.url}}">
+<img src="{{product.Product_Image_2.url}}">
+<br>
+{% if Authenticated %}
+<a href="{% url 'delete-product' product.id %}">Delete Product</a><br>
+<a href="{% url 'edit-product' product.id %}">Edit Product</a><br>
+{%endif%}
+<hr>
+{%endfor%}
+
+
+Hey I am unavailable on:<br><br>
+{% for dates in  dates_unavailable %}
+{{dates.date_unavailable}}<br>
+{% if Authenticated %}
+<a href="{% url 'edit-inavailability' dates.pk %}">edit</a>
+<a href="{% url 'delete-inavailability' dates.pk %}">delete</a>
+<br>
+{% endif %}
+<br>
+{% endfor %}
+<br><br>
+
+{%endblock content%}
